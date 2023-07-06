@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
+    <meta charset="UTF-8">
+    <title>虛擬旅遊推薦</title>
+    <link rel="shortcut icon" href="#" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <br><br><br>
+    <div class="container">
+        <div class="container">
+            <h1 class="text-center fw-bold">首頁</h1>
+            <div class="mb-3">
+                <label class="form-label fw-bold">情緒語句輸入</label>
+                <input type="text" class="form-control" id="emotionInput" />
+            </div>
+            <br>
+            <div class="text-center">
+                <button onclick="emotionJudge()" type="button" class="btn btn-secondary fw-bold w-75 btn-lg">送出</button>
+            </div>
+            <br><br>
+            <div class="mb-3">
+                <label class="form-label fw-bold">翻譯語句輸入</label>
+                <select class="form-select" name="language" id="language">
+                    <option th:each="item : ${T(com.nuu.components.CountryLanguage).values()}" th:value="${item}" th:text="${item}"></option>
+                </select>
+                <br>
+                <input type="text" class="form-control" id="translationInput" />
+            </div>
+            <br>
+            <div class="text-center">
+                <button onclick="translateStmt()" type="button" class="btn btn-secondary fw-bold w-75 btn-lg">翻譯</button>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-12">
+                    <label class="fw-bold fs-2">輸出結果:&nbsp;&nbsp;</label>
+                    <code class="text-center text-secondary" id="output"></code>
+                </div>
+            </div>
+            <div class="footer d-grid gap-2 journey">
+                <button onclick="location.href='/virtualjourney/taipei'" type="button" class="btn btn-dark btn-lg fw-bold">前往導覽</button>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br>
+    </div>
+</body>
+<style>
+    #output{
+        word-wrap: break-word;
+        font-size: 4vmin;
+    }
+    .journey{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+</style>
+<script>
+    const emotionJudge = () => {
+        const emotionInput = $("#emotionInput").val().trim();
+        const questionObject = {
+            "question": emotionInput
+        };
+        axios.post(
+            "/virtualjourney/api/chat/emotion",
+            questionObject,
+            {
+                headers:{
+                    "Content-Type": "application/json"
+                }
+            }
+        ).then(
+            (response)=>{
+                const answer = response.data;
+                console.log(answer);
+                $("#output").text(answer);
+            }
+        )
+    };
+    const translateStmt = () => {
+        const stmt = $("#translationInput").val().trim();
+        const language = encodeURIComponent($("#language").val().toString().trim());
+        const jsonObject = {
+            "question": stmt
+        };
+        axios.post(
+            `/virtualjourney/api/chat/i18/${language}`,
+            jsonObject,
+            Headers={
+                "Content-Type": "application/json;charset=UTF-8"
+            }
+        ).then(
+            (response)=>{
+                const translate = response.data;
+                // console.log(translate);
+                $("#output").text(translate);
+            }
+        ).catch(
+            (err)=>{
+                console.error(err);
+            }
+        );
+    };
+</script>
+</html>

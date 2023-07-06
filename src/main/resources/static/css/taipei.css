@@ -1,0 +1,96 @@
+body{
+    background-color: white;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+}
+#taipei{
+    width: 100%;
+    height: 100vh;
+    padding: 0 50px 50px 50px;
+    z-index: 9999;
+}
+#taipei path{
+    stroke: black;
+    fill: #b5e3b2;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#taipei path:hover{
+    fill: aqua;
+    transform: translate(-5px, -5px);
+}
+.nowArea{
+    position: absolute;
+    top: 6%;
+    right: 11%;
+    max-width: 100%;
+    height: auto;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 20px;
+    display: none;
+}
+.person{
+    position: fixed;
+    left: 10px;
+    bottom: 10%;
+    width: 30%;
+    max-height: 100%;
+}
+#person{
+    position: fixed;
+    bottom: 10%;
+    max-width: 30%;
+    height: auto;
+    z-index: 0;
+    /*animation: move 1s ease-in-out infinite alternate;*/
+}
+/*@keyframes move {*/
+/*    from{*/
+/*        transform: rotate(-10deg) translate(-50px);*/
+/*    }*/
+/*    to{*/
+/*        transform: rotate(10deg) translate(50px);*/
+/*    }*/
+/*}*/
+.story{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    z-index: 1;
+}
+
+.modal-dialog{
+    position: absolute;
+    top: 10%;
+    right: 15%;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
+}
+
+#spotModal{
+    position: absolute;
+    top: 25%;
+    right: 14%;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
+}
+
+#back{
+    position: fixed;
+    bottom: 32%;
+    right: 5%;
+}
+
+/*#spotModal{*/
+/*    position: fixed;*/
+/*    top: 5%;*/
+/*    right: 10px;*/
+/*}*/
