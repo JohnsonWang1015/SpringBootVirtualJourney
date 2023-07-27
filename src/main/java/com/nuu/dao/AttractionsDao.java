@@ -60,4 +60,18 @@ public class AttractionsDao implements IDaoOperations<Attractions, Integer> {
     public boolean delete(Integer key) {
         return false;
     }
+
+    public Attractions selectForAttractionName(String key){
+        String sql = "Select * From attractions Where name like ?;";
+        try{
+            Attractions result = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Attractions.class), new Object[]{"%"+key+"%"});
+            if(result != null){
+                return result;
+            }
+        }catch (DataAccessException ex){
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        return null;
+    }
 }
