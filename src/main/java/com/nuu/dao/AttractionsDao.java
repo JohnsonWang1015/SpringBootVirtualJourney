@@ -26,11 +26,13 @@ public class AttractionsDao implements IDaoOperations<Attractions, Integer> {
         String sql = "Select * From attractions Where id=?;";
         try{
             Attractions result = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Attractions.class), new Object[]{key});
+//            assert result != null;
+//            System.out.println(result.getArea());
             if(result != null){
                 return result;
             }
         }catch (DataAccessException ex){
-            System.out.println(ex.getMessage());
+            System.out.println("AttractionsDao selectForObject(): " + ex.getMessage());
             return null;
         }
         return null;
@@ -41,11 +43,11 @@ public class AttractionsDao implements IDaoOperations<Attractions, Integer> {
         String sql = "Select * From attractions;";
         try{
             List<Attractions> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Attractions.class));
-            if(result.size() > 0){
+            if(!result.isEmpty()){
                 return result;
             }
         }catch (DataAccessException ex){
-            System.out.println(ex.getMessage());
+            System.out.println("AttractionsDao selectAll(): " + ex.getMessage());
             return null;
         }
         return null;
@@ -69,7 +71,7 @@ public class AttractionsDao implements IDaoOperations<Attractions, Integer> {
                 return result;
             }
         }catch (DataAccessException ex){
-            System.out.println(ex.getMessage());
+            System.out.println("AttractionsDao selectForAttractionName(): " + ex.getMessage());
             return null;
         }
         return null;

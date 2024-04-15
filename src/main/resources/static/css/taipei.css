@@ -23,7 +23,7 @@ body{
 .nowArea{
     position: absolute;
     top: 6%;
-    right: 11%;
+    right: 40%;
     max-width: 100%;
     height: auto;
     background-color: rgba(0,0,0,0.5);
@@ -34,14 +34,14 @@ body{
 .person{
     position: fixed;
     left: 10px;
-    bottom: 10%;
+    bottom: 17%;
     width: 30%;
     max-height: 100%;
     z-index: 4;
 }
 #person{
     position: fixed;
-    bottom: 10%;
+    bottom: 17%;
     max-width: 30%;
     height: auto;
     z-index: 4;
@@ -81,7 +81,6 @@ body{
     right: 14%;
     z-index: 10040;
     overflow: auto;
-    overflow-y: auto;
 }
 
 #back{

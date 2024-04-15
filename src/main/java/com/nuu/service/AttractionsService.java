@@ -26,8 +26,7 @@ public class AttractionsService {
 
     @GetMapping(path = "/api/spot/{id}", produces = "application/json")
     public Attractions queryByAttractionId(@PathVariable(name = "id") Integer id){
-        Attractions result = attractionsDao.selectForObject(id);
-        return result;
+        return attractionsDao.selectForObject(id);
     }
 
     @GetMapping(path = "/api/spot/{name}/search", produces = "application/json")

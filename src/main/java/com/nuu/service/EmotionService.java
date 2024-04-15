@@ -15,6 +15,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,9 @@ import java.util.ArrayList;
 @RestController
 public class EmotionService {
 
-    private final String token = "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";
+//    private final String token = "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";
+    @Value("${api.gpt.token}")
+    private String token;
     private final String chatgptURL = "https://api.openai.com/v1/chat/completions";
 //    private static ArrayList<Message> messages = new ArrayList<>();
 
